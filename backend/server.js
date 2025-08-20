@@ -24,8 +24,10 @@ const logger = pino({
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Create uploads directory if it doesn't exist
-const uploadsDir = path.join(__dirname, 'uploads');
+// Create uploads directory if it doesn't exist (prefer env var for deployments)
+const uploadsDir = process.env.STORAGE_DIR
+  ? path.resolve(process.env.STORAGE_DIR)
+  : path.join(process.cwd(), 'uploads');
 if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir, { recursive: true });
   logger.info('Created uploads directory');
@@ -90,7 +92,7 @@ app.use((req, res, next) => {
 // File upload configuration
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const uploadDir = path.join(__dirname, 'uploads');
+    const uploadDir = uploadsDir;
     if (!fs.existsSync(uploadDir)) {
       fs.mkdirSync(uploadDir, { recursive: true });
     }

@@ -33,9 +33,7 @@ services:
       - STORAGE_DIR=/app/uploads
       - FILE_TTL_MINUTES=30
     volumes:
-      - ./backend:/app
       - ./uploads:/app/uploads
-      - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       redis:
         condition: service_healthy
@@ -52,6 +50,8 @@ services:
       context: ./workers
       dockerfile: Dockerfile.pdf
     container_name: pdf-converter-pdf-worker
+    profiles:
+      - workers
     environment:
       - NODE_ENV=production
       - REDIS_URL=redis://redis:6379
@@ -77,6 +77,8 @@ services:
       context: ./workers
       dockerfile: Dockerfile.office
     container_name: pdf-converter-office-worker
+    profiles:
+      - workers
     environment:
       - NODE_ENV=production
       - REDIS_URL=redis://redis:6379
@@ -102,6 +104,8 @@ services:
       context: ./workers
       dockerfile: Dockerfile.image
     container_name: pdf-converter-image-worker
+    profiles:
+      - workers
     environment:
       - NODE_ENV=production
       - REDIS_URL=redis://redis:6379
@@ -128,18 +132,15 @@ services:
       dockerfile: Dockerfile
     container_name: pdf-converter-frontend
     ports:
-      - "3000:3000"
+      - "3000:80"
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
       - VITE_API_URL=http://localhost:5000
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
     depends_on:
       - backend
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
       interval: 30s
       timeout: 10s
       retries: 3
