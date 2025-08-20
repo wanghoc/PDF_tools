@@ -17,14 +17,14 @@ const Header = () => {
   const location = useLocation()
 
   const navigation = [
-    { name: 'Merge PDF', href: '/merge-pdf', icon: FileText, description: 'Combine multiple PDFs' },
-    { name: 'Split PDF', href: '/split-pdf', icon: Scissors, description: 'Split PDF into multiple files' },
-    { name: 'Compress PDF', href: '/compress-pdf', icon: Scissors, description: 'Reduce PDF file size' },
-    { name: 'PDF to Image', href: '/pdf-to-image', icon: Image, description: 'Convert PDF to images' },
-    { name: 'Image to PDF', href: '/image-to-pdf', icon: FileImage, description: 'Convert images to PDF' },
-    { name: 'Office to PDF', href: '/office-to-pdf', icon: FileSpreadsheet, description: 'Convert Office files' },
-    { name: 'Extract Pages', href: '/extract-pages', icon: Scissors, description: 'Extract specific pages' },
-    { name: 'Rearrange Pages', href: '/rearrange-pages', icon: Move, description: 'Reorder PDF pages' },
+    { name: 'Ghép PDF', href: '/merge-pdf', icon: FileText, description: 'Kết hợp nhiều tệp PDF' },
+    { name: 'Chia PDF', href: '/split-pdf', icon: Scissors, description: 'Chia PDF thành nhiều tệp' },
+    { name: 'Nén PDF', href: '/compress-pdf', icon: Scissors, description: 'Giảm dung lượng PDF' },
+    { name: 'PDF sang Ảnh', href: '/pdf-to-image', icon: Image, description: 'Chuyển trang PDF thành ảnh' },
+    { name: 'Ảnh sang PDF', href: '/image-to-pdf', icon: FileImage, description: 'Tạo PDF từ ảnh' },
+    { name: 'Office sang PDF', href: '/office-to-pdf', icon: FileSpreadsheet, description: 'Chuyển Office sang PDF' },
+    { name: 'Trích Trang', href: '/extract-pages', icon: Scissors, description: 'Trích xuất trang cụ thể' },
+    { name: 'Sắp Xếp Trang', href: '/rearrange-pages', icon: Move, description: 'Sắp xếp lại trang PDF' },
   ]
 
   const isActive = (path: string) => location.pathname === path
@@ -44,8 +44,8 @@ const Header = () => {
                 <FileText className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gradient">PDF Converter Pro</h1>
-                <p className="text-xs text-gray-500 -mt-1">Professional PDF Tools</p>
+                <h1 className="text-xl font-bold text-gradient">PDF Tools</h1>
+                <p className="text-xs text-gray-500 -mt-1">Bộ công cụ PDF chuyên nghiệp</p>
               </div>
             </motion.div>
           </Link>
@@ -68,8 +68,6 @@ const Header = () => {
                     <Icon className="w-4 h-4" />
                     <span>{item.name}</span>
                   </div>
-                  
-                  {/* Tooltip */}
                   <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 text-xs text-white bg-gray-900 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
                     {item.description}
                     <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
@@ -80,15 +78,15 @@ const Header = () => {
           </nav>
 
           {/* CTA Button */}
-          <div className="hidden lg:flex items-center space-x-4">
+          {/* <div className="hidden lg:flex items-center space-x-4">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="btn-primary"
             >
-              Get Started
+              Bắt đầu
             </motion.button>
-          </div>
+          </div> */}
 
           {/* Mobile menu button */}
           <div className="lg:hidden">
@@ -140,7 +138,7 @@ const Header = () => {
                 whileTap={{ scale: 0.95 }}
                 className="w-full btn-primary"
               >
-                Get Started
+                Bắt đầu
               </motion.button>
             </div>
           </motion.div>
